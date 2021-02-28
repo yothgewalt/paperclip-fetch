@@ -3,11 +3,11 @@
 package="paperclip.jar"
 
 oldsum=$(md5sum paperclip.jar | awk '{print $1}')
-newsum=$(curl -s 'https://papermc.io/ci/job/Paper-<VERSION>/lastSuccessfulBuild/artifact/paperclip.jar/*fingerprint*/' | ~/go/bin/pup '.md5sum json{}' | jq '.[0].text' -r | awk '{print $2}')
+newsum=$(curl -s 'https://papermc.io/ci/job/Paper-1.16/lastSuccessfulBuild/artifact/paperclip.jar/*fingerprint*/' | ~/go/bin/pup '.md5sum json{}' | jq '.[0].text' -r | awk '{print $2}')
 
 while [[ true ]]; do
         if [[ "$oldsum" != "$newsum" ]]; then
-            wget https://papermc.io/ci/job/Paper-<VERSION>/lastSuccessfulBuild/artifact/paperclip.jar -O paperclip.jar
+            wget https://papermc.io/ci/job/Paper-1.16/lastSuccessfulBuild/artifact/paperclip.jar -O paperclip.jar
         fi
         
         echo 'System Warning: Please wait 3 seconds for the next server to run. (Ctrl-Z to Stop)'
